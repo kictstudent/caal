@@ -4,19 +4,19 @@ welcome:   .asciiz "welcome to our restaurant\n"
 home: .asciiz "choose option: "
 option: .asciiz "(1)Display menu    (2)fetch\n"
 
-#list of menu
-rice: .asciiz "\n1)fried rice\n"
-noodle: .asciiz "2)curry noodle\n"
-chicken: .asciiz "3)chicken chop\n"
-fish: .asciiz "4)fish and chips\n"
-meatball: .asciiz "5)blackpapper meatball\n"
-tea: .asciiz "6)ice lemon tea\n" 
-milo: .asciiz "7)ice milo\n"
-coffee: .asciiz "8)hot coffee\n"
-orange: .asciiz "9)orange juice\n"
-smoothie: .asciiz "10)chocolate smoothie"
+#list of inventory
+rice: .asciiz "\n1) rice\n"
+noodle: .asciiz "2) noodle\n"
+chicken: .asciiz "3) chicken\n"
+fish: .asciiz "4) fish\n"
+meat: .asciiz "5) meat\n"
+tea: .asciiz "6) tea\n" 
+milo: .asciiz "7) milo\n"
+coffee: .asciiz "8) coffee\n"
+fruit: .asciiz "9) fruit"
+vegetables: .asciiz "10) vegetables"
 
-menu: .word rice, noodle, chicken, fish, meatball, tea, milo, coffee, orange, smoothie		#array of menu list
+inventory: .word rice, noodle, chicken, fish, meat, tea, milo, coffee, fruit, vegetables		#array of inventory list
 
 iterator:	.word 0		#first index of array
 size:		.word 9	      	#last index of array
@@ -40,14 +40,14 @@ main:
         syscall
         
         move $t1, $v0
-        bne $t0, $t1, display_array	#compare input element. if 1 go to display menu list. else to to fetch
+        bne $t0, $t1, display_array	#compare input element. if 1 go to display inventory list. else to to fetch
  
- #size of menu array       
-        la $t0, menu
+ #size of inventory array       
+        la $t0, inventory
         lw $t1, iterator
         lw $t2, size
         
- #print elements in menu array
+ #print elements in inventory array
  display_array:
  	#for() loop 
 	bgt $t1, $t2, exit_loop
